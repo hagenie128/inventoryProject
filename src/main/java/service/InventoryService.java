@@ -61,4 +61,10 @@ public class InventoryService {
     public boolean insertProduct(ProductVO productVO) {
         return list.add(productVO);
     }
+
+    public void deleteProduct(String productId) throws InventoryException {
+        if (!list.remove(new ProductVO(productId, null, 0, 0, 0, null))) {
+            throw new InventoryException("존재하지 않는 제품입니다.");
+        }
+    }
 }
