@@ -29,6 +29,15 @@ public class HandlerMapping {
             case 6:
                 controller = new OutStockController();
                 break;
+            case 7:
+                controller = new LackStockController();
+                break;
+            case 8:
+                controller = new TotalValueController();
+                break;
+            case 9:
+                controller = new CategoryStatsController();
+                break;
         }
         return controller;
     }

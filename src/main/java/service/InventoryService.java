@@ -5,6 +5,8 @@ import vo.ProductVO;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InventoryService {
     private static InventoryService instance = new InventoryService();
@@ -74,5 +76,50 @@ public class InventoryService {
             throw new InventoryException("존재하지 않는 제품입니다.");
         }
         return list.get(idx);
+    }
+
+    public ArrayList<ProductVO> getLackStockList() {
+        ArrayList<ProductVO> lackStockList = new ArrayList<>();
+        for (ProductVO vo : list) {
+            if (vo.getStock() < vo.getMinStock()) {
+                lackStockList.add(vo);
+            }
+        }
+        return lackStockList;
+    }
+
+    public int getTotalValue() {
+        int totalValue = 0;
+        for (ProductVO vo : list) {
+            totalValue += vo.getPrice() * vo.getStock();
+        }
+        return totalValue;
+    }
+
+    public ArrayList<String> getCategoryStats() {
+        Map<String, Integer> map = new HashMap<>();
+
+        for (ProductVO vo : list) {
+            String category = vo.getCategory();
+
+            if (map.containsKey(category)) {
+                map.put(category, map.get(category) + 1);
+            } else {
+                map.put(category, 1);
+            }
+        }
+
+        ArrayList<String> categoryStats = new ArrayList<>();
+
+        for (String category : map.keySet()) {
+            String stat = String.format(
+                    "%s류 제품: %d종",
+                    category,
+                    map.get(category)
+            );
+            categoryStats.add(stat);
+        }
+
+        return categoryStats;
     }
 }
