@@ -15,6 +15,5 @@ public class PrintAllController implements Controller {
         for (ProductVO vo : list) {
             System.out.println(vo);
         }
-
     }
 }

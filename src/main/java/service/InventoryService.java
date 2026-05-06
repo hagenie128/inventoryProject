@@ -1,5 +1,6 @@
 package service;
 
+import exception.InventoryException;
 import vo.ProductVO;
 
 import java.io.*;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 
 public class InventoryService {
     private static InventoryService instance = new InventoryService();
-    private ArrayList<ProductVO> list ;
+    private final ArrayList<ProductVO> list ;
 
     private InventoryService() {
         list = new ArrayList<>();
@@ -49,5 +50,15 @@ public class InventoryService {
         if (instance == null)
             instance = new InventoryService();
         return instance;
+    }
+
+    public void checkDuplicate(String productId) throws InventoryException {
+        int idx = list.indexOf(new ProductVO(productId, null, 0, 0, 0, null));
+        if (idx != -1){
+            throw new InventoryException("이미 존재하는 제품입니다.");
+        }
+    }
+    public boolean insertProduct(ProductVO productVO) {
+        return list.add(productVO);
     }
 }
