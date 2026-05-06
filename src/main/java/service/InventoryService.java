@@ -67,4 +67,12 @@ public class InventoryService {
             throw new InventoryException("존재하지 않는 제품입니다.");
         }
     }
+
+    public ProductVO searchProductId(String productId) throws InventoryException {
+        int idx = list.indexOf(new ProductVO(productId, null, 0, 0, 0, null));
+        if (idx == -1) {
+            throw new InventoryException("존재하지 않는 제품입니다.");
+        }
+        return list.get(idx);
+    }
 }

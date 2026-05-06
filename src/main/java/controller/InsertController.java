@@ -20,11 +20,11 @@ public class InsertController implements Controller {
                 String name = sc.nextLine();
                 System.out.print("등록할 물품 가격 : ");
                 int price = sc.nextInt(); sc.nextLine();
-                System.out.println("등록할 물품 재고 : ");
+                System.out.print("등록할 물품 재고 : ");
                 int stock = sc.nextInt(); sc.nextLine();
-                System.out.println("등록할 물품 최소 재고 : ");
+                System.out.print("등록할 물품 최소 재고 : ");
                 int minStock = sc.nextInt(); sc.nextLine();
-                System.out.println("등록할 물품 카테고리 : ");
+                System.out.print("등록할 물품 카테고리 : ");
                 String category = sc.nextLine();
 
                 boolean flag = InventoryService.getInstance().insertProduct
