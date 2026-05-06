@@ -1,5 +1,6 @@
 package controller;
 
+import exception.InventoryException;
 import service.InventoryService;
 import vo.ProductVO;
 
@@ -29,7 +30,7 @@ public class InsertController implements Controller {
                 boolean flag = InventoryService.getInstance().insertProduct
                         (new ProductVO(productId, name, price, stock, minStock, category));
             System.out.println(flag ? "물품이 등록되었습니다." : "물품 등록에 실패하였습니다.");
-        } catch (IllegalArgumentException e) {
+        } catch (InventoryException e) {
             System.out.println(e.getMessage());
         }
 
