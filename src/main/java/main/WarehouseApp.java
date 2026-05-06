@@ -21,6 +21,10 @@ public class WarehouseApp {
                 System.out.println("7. 재고 부족 물품 조회");
                 System.out.println("8. 창고 총 자산 가치 계산");
                 System.out.println("9. 카테고리별 물품 개수 조회");
+                System.out.println("10. 물품명 검색");
+                System.out.println("11. 카테코리별 검색");
+                System.out.println("12. 재고 적은 순 정렬");
+                System.out.println("13. 가격 높은 순 정렬");
                 System.out.println("0. 프로그램 종료");
                 System.out.println("원하시는 메뉴번호를 입력하세요 :");
                 int no = sc.nextInt();

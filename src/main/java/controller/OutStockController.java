@@ -1,6 +1,7 @@
 package controller;
 
 import exception.InventoryException;
+import service.InventoryService;
 import vo.ProductVO;
 
 import java.util.Scanner;
@@ -27,6 +28,7 @@ public class OutStockController implements Controller {
             System.out.println(vo.getName() + "의 재고가 "
                     + amount + "개 출고되었습니다. 현재 재고 : " + vo.getStock() + "개");
             System.out.println("물품 출고가 완료되었습니다.");
+            InventoryService.getInstance().outStockLog(vo,amount);
         } catch (InventoryException e) {
             System.out.println(e.getMessage());
             System.out.println("물품 출고에 실패하였습니다.");

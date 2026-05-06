@@ -122,4 +122,37 @@ public class InventoryService {
 
         return categoryStats;
     }
+    public void inStockLog(ProductVO vo, int amount) {
+        try {
+            FileWriter fw = new FileWriter("stock_log.txt", true);
+            PrintWriter pw = new PrintWriter(fw);
+            String log = String.format(
+                    "%s %s %s %s %d개",
+                    java.time.LocalDateTime.now(),
+                    vo.getProductId(),vo.getName(),
+                    "입고",
+                    amount
+            );
+            pw.println(log);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void outStockLog(ProductVO vo, int amount) {
+        try {
+            FileWriter fw = new FileWriter("stock_log.txt", true);
+            PrintWriter pw = new PrintWriter(fw);
+            String log = String.format(
+                    "%s %s %s %s %d개",
+                    java.time.LocalDateTime.now(),
+                    vo.getProductId(),vo.getName(),
+                    "출고",
+                    amount
+            );
+            pw.println(log);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }

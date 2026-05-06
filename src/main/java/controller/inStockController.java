@@ -1,8 +1,10 @@
 package controller;
 
 import exception.InventoryException;
+import service.InventoryService;
 import vo.ProductVO;
 
+import java.security.Provider;
 import java.util.Scanner;
 
 public class inStockController implements Controller {
@@ -12,11 +14,12 @@ public class inStockController implements Controller {
         System.out.print("입고할 물품번호 : ");
         String productId = sc.nextLine();
         try {
-            ProductVO vo = service.InventoryService.getInstance().searchProductId(productId);
+            ProductVO vo = InventoryService.getInstance().searchProductId(productId);
             int oldStock = vo.getStock();
             System.out.print("입고할 수량 : ");
             int amount = sc.nextInt(); sc.nextLine();
             vo.setStock(oldStock + amount);
+            InventoryService.getInstance().inStockLog(vo,amount);
             System.out.println(vo.getName() + "의 재고가 "
                     + amount + "개 입고되었습니다. 현재 재고 : " + vo.getStock() + "개");
             System.out.println("물품 입고가 완료되었습니다.");
