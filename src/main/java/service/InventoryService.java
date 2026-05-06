@@ -4,6 +4,8 @@ import exception.InventoryException;
 import vo.ProductVO;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -123,14 +125,15 @@ public class InventoryService {
         return categoryStats;
     }
     public void inStockLog(ProductVO vo, int amount) {
-        try {
-            FileWriter fw = new FileWriter("stock_log.txt", true);
-            PrintWriter pw = new PrintWriter(fw);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String time = LocalDateTime.now().format(formatter);
+        try (FileWriter fw = new FileWriter("stock_log.txt", true);
+            PrintWriter pw = new PrintWriter(fw)){
             String log = String.format(
-                    "%s %s %s %s %d개",
-                    java.time.LocalDateTime.now(),
-                    vo.getProductId(),vo.getName(),
-                    "입고",
+                    "%s %s %s 입고 %d개",
+                    time,
+                    vo.getProductId(),
+                    vo.getName(),
                     amount
             );
             pw.println(log);
@@ -140,14 +143,15 @@ public class InventoryService {
     }
 
     public void outStockLog(ProductVO vo, int amount) {
-        try {
-            FileWriter fw = new FileWriter("stock_log.txt", true);
-            PrintWriter pw = new PrintWriter(fw);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String time = LocalDateTime.now().format(formatter);
+        try (FileWriter fw = new FileWriter("stock_log.txt", true);
+            PrintWriter pw = new PrintWriter(fw)){
             String log = String.format(
-                    "%s %s %s %s %d개",
-                    java.time.LocalDateTime.now(),
-                    vo.getProductId(),vo.getName(),
-                    "출고",
+                    "%s %s %s 출고 %d개",
+                    time,
+                    vo.getProductId(),
+                    vo.getName(),
                     amount
             );
             pw.println(log);
