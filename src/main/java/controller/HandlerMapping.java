@@ -23,7 +23,12 @@ public class HandlerMapping {
             case 4:
                 controller = new PrintAllController();
                 break;
-
+            case 5:
+                controller = new inStockController();
+                break;
+            case 6:
+                controller = new OutStockController();
+                break;
         }
         return controller;
     }
